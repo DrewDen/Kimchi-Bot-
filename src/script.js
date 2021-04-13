@@ -2,18 +2,26 @@ require('dotenv').config();
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
-client.login(process.env.DISCORDJS_BOT_TOKEN);
 
-// let readyDiscord = () => {
-//     console.log('hello world');
 
-// }
+const botreply = {
+    greetone:' Hello and welcome to your Kimchi project channnel',
+    greettwo:'let me show you your sprite week planner'
+};
 
-// client.on('ready', readyDiscord);
+client.on('ready', ()=>{
+    console.log(`${client.user.tag} has logged in.  Thank you.`)
+});
 
-let gotMessage = msg =>{
+client.on('message', msg =>{ 
+    if(msg.author.bot) return;
+
     console.log(`${msg.author.tag} : ${msg.content}`);
-   }
+    if(msg.content === 'hello'){
+        msg.reply(botreply.greetone);
+    }
 
-client.on('message', gotMessage);
+}); 
 
+
+client.login(process.env.DISCORDJS_BOT_TOKEN);
